@@ -8,11 +8,11 @@
 #### История содания
 Создатели языка инженеры компании Sun Microsystems:
 
-![Patrick](../resources/Patrick Naughton.jpeg)
+![Patrick](https://github.com/KessoPavel/LevelUp_Java/blob/master/resources/Patrick%20Naughton.jpeg)
 
 Патрик Ноутон (Patrick Naughton) - руководитель группы инженеров.
 
-![James](../resources/James Gosling.jpeg)
+![James](https://github.com/KessoPavel/LevelUp_Java/blob/master/resources/James%20Gosling.jpeg)
 
 Джеймс Гослинг (James Gosling) - член Совета директоров и, как его еще иногда называют, разносторонний "компьютерный волшебник".
 
