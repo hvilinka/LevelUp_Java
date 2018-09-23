@@ -1,6 +1,6 @@
 # Занятие 1. Введение.
 
-1. [Введение](#introduction)  
+1. [Введение](#introduction)
     1. [Что такое машинный код?](#machine_code)
     2. [Что такое язык программирования?](#programm_language)
     3. [Компилируемые, интерпретируемые и встраиваемые языки](#comp_int)
@@ -126,8 +126,8 @@ Java очень обширно применяется в финансовой с
 
 #### Инструменты, которые понадобятся
 
-1. [JDK](../master/guides/jdk_install_guides.md)
-2. [IDE](../master/guides/ide_install_guide.md)
+1. [JDK](../guides/jdk_install_guides.md)
+2. [IDE](../guides/ide_install_guide.md)
 
 
 <a name="hello"/>
