@@ -8,7 +8,7 @@
     1. [История создания языка Java](#java_history)
     2. [Основные особенности языка](#features)
     3. [JVM](#jvm)
-    4. [Рэйтинги](#IEEE)
+    4. [Рейтинги](#IEEE)
     5. [Использование Java](#java_use)
     6. [Инструменты, которые понадобятся](#ide)
 3. [Hello Word!](#hello)
@@ -88,8 +88,8 @@ JVM является ключевым компонентом платформы 
 
 <a name="IEEE"/>
 
-#### Рэйтинги
-Рэйтинг по версии IEEE Specrum.
+#### Рейтинги
+Рейтинг по версии IEEE Specrum.
 [The Top Programming Languages 2018](https://spectrum.ieee.org/static/interactive-the-top-programming-languages-2018)
 
 ![IEEE Specrum](https://github.com/KessoPavel/LevelUp_Java/blob/master/resources/IEEE%20Spectrum.png)
