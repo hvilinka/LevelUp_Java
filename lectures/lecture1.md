@@ -169,8 +169,9 @@ Java очень обширно применяется в финансовой с
 
 #### Ключивые слова
 
-| abstract |	continue |	for |	new |	switch |
+||||||
 |:--------:|:---------:|:----:|:---:|:------:|
+| **abstract** |	**continue** |	**for** |	**new** |	**switch** |
 | **assert** |	**default** |	**goto*** |	**package** |	**synchronized** |
 | **boolean** |	**do** |	**if** |	**private** |	**this** |
 | **break** |	**double** |	**implements** |	**protected** |	**throw** |
