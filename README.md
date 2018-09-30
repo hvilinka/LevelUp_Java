@@ -1,7 +1,7 @@
 # LevelUp Java course
-1. [Програма курса](#programm)
-2. [Гайды](#guides)
-3. [Контакты](#contacts)
+* [Програма курса](#programm)
+* [Гайды](#guides)
+* [Контакты](#contacts)
 
 <a name="programm"/>
 
@@ -9,7 +9,7 @@
 
 1. [Введение в Java. JVM. Работа в IDE. Hello World!
    Отладка. Поиск ошибок.](../master/lectures/lecture1.md)
-2. Типы данных. Переменные. Арифметичекие/логические операции.
+2. [Типы данных. Переменные. Арифметичекие/логические операции.](../master/lectures/lecture2.md)
 3. Потоки ввода/вывода.
    Функции.
 4. Операторы ветвления. Циклы.
@@ -27,10 +27,13 @@
 
 ## Гайды
 
-1. [Установка JDK](../master/guides/jdk_install_guides.md)
-2. [Установка IDE](../master/guides/ide_install_guide.md)
-3. [Создание проекта в IntelliJ IDEA](../master/guides/create_project_guide.md)
+* [Установка JDK](../master/guides/jdk_install_guides.md)
+* [Установка IDE](../master/guides/ide_install_guide.md)
+* [Создание проекта в IntelliJ IDEA](../master/guides/create_project_guide.md)
 
 <a name="contacts"/>
 
 ## Контакты
+
+* [Telegram канал](https://t.me/lavel_up_java_2018)
+* [vk](https://vk.com/kessopavel)
