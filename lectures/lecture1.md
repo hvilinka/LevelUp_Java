@@ -207,7 +207,7 @@ Java очень обширно применяется в финансовой с
 
 [Создание первого проекта](../guides/create_project_guide.md)
 
-<a name="bebug"/>
+<a name="debug"/>
 
 ## Отладка
 

@@ -28,7 +28,7 @@
 ## Гайды
 
 1. [Установка JDK](../master/guides/jdk_install_guides.md)
-2. [Установка IDE](../master/guides/ide_install_guides.md)
+2. [Установка IDE](../master/guides/ide_install_guide.md)
 3. [Создание проекта в IntelliJ IDEA](../master/guides/create_project_guide.md)
 
 <a name="contacts"/>
