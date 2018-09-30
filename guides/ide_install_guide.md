@@ -1,9 +1,9 @@
-# IDE install guide
+# Установка IDE
 
-### IntelliJ IDEA
+## IntelliJ IDEA
 
 https://www.jetbrains.com/idea/
 
-### Eclipse
+## Eclipse
 
 https://www.eclipse.org/downloads/packages/release/neon/2/eclipse-ide-java-developers
