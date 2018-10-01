@@ -19,6 +19,12 @@
 
 ## Шаг 2: Установить JDK из файла
 
+Ну с этим все справятся(если что пишите в telegram канал).
+
+## Шаг 3: Перезагрузить Windows.
+
+Это может решить много проблем.
+
 <a name="lin"/>
 
 # Ubuntu
@@ -32,5 +38,3 @@
 Просто введите команду _**sudo apt-get install default-jdk**_
 
 ![terminal](../resources/jdk_install_linix_2.png)
-
-##
