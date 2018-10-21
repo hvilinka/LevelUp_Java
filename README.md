@@ -11,7 +11,7 @@
    Отладка. Поиск ошибок.](../master/lectures/lecture1.md)
 2. [Типы данных. Переменные. Арифметичекие/логические операции.](../master/lectures/lecture2.md)
 3. [Потоки ввода/вывода.
-   Функции.](../mster/lectures/lecture3.md)
+   Функции.](../master/lectures/lecture3.md)
 4. [Операторы ветвления. Циклы.](../master/lectures/lecture4.md)
 5. [Масивы. Строки.](../master/lectures/lecture5.md)
 6. ООП. Классы. Объекты. Интерфейсы. Обстрактные классы.
