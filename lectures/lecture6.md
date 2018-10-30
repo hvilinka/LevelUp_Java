@@ -1,14 +1,16 @@
 # Объектно ориентированное программирование. Классы. объекты
 
+
+
 <a name="oop"/>
 
 Объектно ориентированное программирование (ООП) — это метод программирования, при использовании которого главными элементами программ являются объекты. В языках программирования понятие объекта реализовано как совокупность свойств (структур данных, характерных для данного объекта), методов их обработки (подпрограмм изменения их свойств) и событий, на которые данный объект может реагировать и, которые приводят, как правило, к изменению свойств объекта. Объединение данных и свойственных им процедур обработки в одном объекте, называется инкапсуляцией и является одним из важнейших принципов ООП.
 
 Есть четыре основные характеристики ООП:
 
-- Инкапсуляция(Сокрытие реализации)
-- Наследование
-- Полиморфизм(Различные реализации)
+- [Инкапсуляция(Сокрытие реализации)](#incapsulation)
+- [Наследование](#nasledovanie)
+- [Полиморфизм(Различные реализации)](#polim)
 - Абстракция(Выделение важного)
 
 <a name="classes&objects"/>
@@ -181,22 +183,22 @@
 
 - **protected**: такой класс или член класса доступен из любого места в текущем классе или пакете или в производных классах, даже если они находятся в других пакетах
 
-- **Модификатор по умолчанию**. Отсутствие модификатора у поля или метода класса предполагает применение к нему модификатора по умолчанию. Такие поля или методы видны всем классам в текущем пакете.
+- **default (package-private).** Модификатор по умолчанию. Отсутствие модификатора у поля или метода класса предполагает применение к нему модификатора по умолчанию. Такие поля или методы видны всем классам в текущем пакете.
 
       public class Program{
 
           public static void main(String[] args) {
 
               Person kate = new Person("Kate", 32, "Baker Street", "+12334567");
-              kate.displayName();     // норм, метод public
-              kate.displayAge();      // норм, метод имеет модификатор по умолчанию
-              kate.displayPhone();    // норм, метод protected
-              //kate.displayAddress();  // ! Ошибка, метод private
+              kate.displayName();     // метод public
+              kate.displayAge();      // метод имеет модификатор по умолчанию
+              kate.displayPhone();    // метод protected
+              //kate.displayAddress();  // ошибка, метод private
 
-              System.out.println(kate.name);      // норм, модификатор по умолчанию
-              System.out.println(kate.address);   // норм, модификатор public
-              System.out.println(kate.age);       // норм, модификатор protected
-              //System.out.println(kate.phone);   // ! Ошибка, модификатор private
+              System.out.println(kate.name);      // модификатор по умолчанию
+              System.out.println(kate.address);   // модификатор public
+              System.out.println(kate.age);       // модификатор protected
+              //System.out.println(kate.phone);   // ошибка, модификатор private
           }
       }
       class Person{
@@ -232,6 +234,7 @@
 
 **Модификатор доступа должен предшествовать остальной части определения переменной или метода.**
 
+<a name="incapsulation"/>
 ### Инкапсуляция
 
 Казалось бы, почему бы не объявить все переменные и методы с модификатором **public**, чтобы они были доступны в любой точке программы вне зависимости от пакета или класса? Возьмем, например, поле age, которое представляет возраст. Если другой класс имеет прямой доступ к этому полю, то есть вероятность, что в процессе работы программы ему будет передано некорректное значение, например, отрицательное число. Подобное изменение данных не является желательным. Либо же мы хотим, чтобы некоторые данные были достуны напрямую, чтобы их можно было вывести на консоль или просто узнать их значение. В этой связи рекомендуется как можно больше ограничивать доступ к данным, чтобы защитить их от нежелательного доступа извне (как для получения значения, так и для его изменения). Использование различных модификаторов гарантирует, что данные не будут искажены или изменены не надлежащим образом. Подобное сокрытие данных внутри некоторой области видимости называется инкапсуляцией.
@@ -557,3 +560,391 @@ out как раз представляет статическую констан
     }
 
 То есть после создания нового объекта Person параметр p и переменная kate в методе main будут хранить ссылки на разные объекты. Переменная kate, которая передавалась в метод, продолжит хранить ссылку на старый объект в памяти. Поэтому ее значение не меняется
+
+
+### Внутренние и вложенные классы
+
+Классы могут быть вложенными (nested), то есть могут быть определены внури других классов. Частным случаем вложенных классов являются внутренние классы (inner class). Например, имеется класс Person, внутри которого определен класс Account:
+
+
+    public class Program{
+
+        public static void main(String[] args) {
+
+            Person tom = new Person("Tom", "qwerty");
+            tom.displayPerson();
+            tom.account.displayAccount();
+        }
+    }
+    class Person{
+
+        private String name;
+        Account account;
+
+        Person(String name, String password){
+            this.name = name;
+            account = new Account(password);
+        }
+        public void displayPerson(){
+            System.out.printf("Person \t Name: %s \t Password: %s \n", name, account.password);
+        }
+
+        public class Account{
+            private String password;
+
+            Account(String pass){
+                this.password = pass;
+            }
+            void displayAccount(){
+                System.out.printf("Account Login: %s \t Password: %s \n", Person.this.name, password);
+            }
+        }
+    }
+Внутренний класс ведет себя как обычный класс за тем исключением, что его объекты могут быть созданы только внутри внешнего класса.
+
+Внутренний класс имеет доступ ко всем полям внешнего класса, в том числе закрытым с помощью модификатора private. Аналогично внешний класс имеет доступ ко всем членам внутреннего класса, в том числе к полям и методам с модификатором private.
+
+Ссылку на объект внешнего класса из внутреннего класса можно получить с помощью выражения Внешний_класс.this, например, Person.this.
+
+Объекты внутренних классов могут быть созданы только в том классе, в котором внутренние классы опеределены. В других внешних классах объекты внутреннего класса создать нельзя.
+
+Еще одной особенностей внутренних классов является то, что их можно объявить внутри любого контекста, в том числе внутри метода и даже в цикле:
+
+    public class Program{
+
+        public static void main(String[] args) {
+
+            Person tom = new Person("Tom");
+            tom.setAccount("qwerty");
+        }
+    }
+    class Person{
+
+        private String name;
+
+        Person(String name){
+            this.name = name;
+        }
+
+        public void setAccount (String password){
+
+            class Account{
+
+                void display(){
+                    System.out.printf("Account Login: %s \t Password: %s \n", name, password);
+                }
+            }
+            Account account = new Account();
+            account.display();
+        }
+    }
+
+Статические вложенные классы
+Кроме внутренних классов также могут статические вложенные классы. Статические вложенные классы позволяют скрыть некоторую комплексную информацию внутри внешнего класса:
+
+    class Math{
+
+        public static class Factorial{
+
+            private int result;
+            private int key;
+
+            public Factorial(int number, int x){
+
+                result=number;
+                key = x;
+            }
+
+            public int getResult(){
+                return result;
+            }
+
+            public int getKey(){
+                return key;
+            }
+        }
+
+        public static Factorial getFactorial(int x){
+
+            int result=1;
+            for (int i = 1; i <= x; i++){
+
+                result *= i;
+            }
+            return new Factorial(result, x);
+        }
+    }
+Здесь определен вложенный класс для хранения данных о вычислении факториала. Основные действия выполняет метод getFactorial, который возвращает объект вложенного класса. И теперь используем классы в методе main:
+
+    public static void main(String[] args) {
+
+        Math.Factorial fact = Math.getFactorial(6);
+        System.out.printf("Факториал числа %d равен %d \n", fact.getKey(), fact.getResult());
+    }
+
+
+<a name="nasledovanie"/>
+
+### Наследование
+
+Одним из ключевых аспектов объектно-ориентированного программирования является наследование. С помощью наследования можно расширить функционал уже имеющихся классов за счет добавления нового функционала или изменения старого. Например, имеется следующий класс Person, описывающий отдельного человека:
+
+    class Person {
+
+        private String name;
+        public String getName(){ return name; }
+
+        public Person(String name){
+
+            this.name=name;
+        }
+
+        public void display(){
+
+            System.out.println("Name: " + name);
+        }
+    }
+
+И, возможно, впоследствии мы захотим добавить еще один класс, который описывает сотрудника предприятия - класс Employee. Так как этот класс реализует тот же функционал, что и класс Person, так как сотрудник - это также и человек, то было бы рационально сделать класс Employee производным (наследником, подклассом) от класса Person, который, в свою очередь, называется базовым классом, родителем или суперклассом:
+
+
+    class Employee extends Person{
+    }
+
+Чтобы объявить один класс наследником от другого, надо использовать после имени класса-наследника ключевое слово extends, после которого идет имя базового класса. Для класса Employee базовым является Person, и поэтому класс Employee наследует все те же поля и методы, которые есть в классе Person.
+
+Использование классов:
+
+    public class Program{
+
+        public static void main(String[] args) {
+
+            Person tom = new Person("Tom");
+            tom.display();
+            Employee sam = new Employee("Sam");
+            sam.display();
+        }
+    }
+    class Person {
+
+        private String name;
+        public String getName(){ return name; }
+
+        public Person(String name){
+
+            this.name=name;
+        }
+
+        public void display(){
+
+            System.out.println("Name: " + name);
+        }
+    }
+    class Employee extends Person{
+
+    }
+Производный класс имеет доступ ко всем методам и полям базового класса (даже если базовый класс находится в другом пакете) кроме тех, которые определены с модификатором private. При этом производный класс также может добавлять свои поля и методы:
+
+    public class Program{
+
+        public static void main(String[] args) {
+
+            Employee sam = new Employee("Sam", "Microsoft");
+            sam.display();  // Sam
+            sam.work();     // Sam works in Microsoft
+        }
+    }
+    class Person {
+
+        private String name;
+        public String getName(){ return name; }
+
+        public Person(String name){
+
+            this.name=name;
+        }
+
+        public void display(){
+
+            System.out.println("Name: " + name);
+        }
+    }
+    class Employee extends Person{
+
+        private String company;
+
+        public Employee(String name, String company) {
+
+            super(name);
+            this.company=company;
+        }
+        public void work(){
+            System.out.printf("%s works in %s \n", getName(), company);
+        }
+    }
+
+В данном случае класс Employee добавляет поле company, которое хранит место работы сотрудника, а также метод work.
+
+Если в базовом классе определены конструкторы, то в конструкторе производного классы необходимо вызвать один из конструкторов базового класса с помощью ключевого слова super. Например, класс Person имеет конструктор, который принимает один параметр. Поэтому в классе Employee в конструкторе нужно вызвать констуктор класса Person. После слова super в скобках идет перечисление передаваемых аргументов. Таким образом, установка имени сотрудника делегируется конструктору базового класса.
+
+При этом вызов конструктора базового класса должен идти в самом начале в конструкторе производного класса.
+
+<a name="polim"/>
+
+### Полиморфизм
+
+### Переопределение методов
+
+Производный класс может определять свои методы, а может переопределять методы, которые унаследованы от базового класса. Например, переопределим в классе Employee метод display:
+
+
+    public class Program{
+
+        public static void main(String[] args) {
+
+            Employee sam = new Employee("Sam", "Microsoft");
+            sam.display();  // Sam
+                            // Works in Microsoft
+        }
+    }
+    class Person {
+
+        private String name;
+        public String getName(){ return name; }
+
+        public Person(String name){
+
+            this.name=name;
+        }
+
+        public void display(){
+
+            System.out.println("Name: " + name);
+        }
+    }
+    class Employee extends Person{
+
+        private String company;
+
+        public Employee(String name, String company) {
+
+            super(name);
+            this.company=company;
+        }
+        @Override
+        public void display(){
+
+            System.out.printf("Name: %s \n", getName());
+            System.out.printf("Works in %s \n", company);
+        }
+    }
+
+Перед переопределяемым методом указывается аннотация @Override. Данная аннотация в принципе необязательна.
+
+При переопределении метода он должен иметь уровень доступа не меньше, чем уровень доступа в базовом класса. Например, если в базовом классе метод имеет модификатор public, то и в производном классе метод должен иметь модификатор public.
+
+Однако в данном случае мы видим, что часть метода display в Employee повторяет действия из метода display базового класса. Поэтому мы можем сократить класс Employee:
+
+
+        private String company;
+
+        public Employee(String name, String company) {
+
+            super(name);
+            this.company=company;
+        }
+        @Override
+        public void display(){
+
+            super.display();
+            System.out.printf("Works in %s \n", company);
+        }
+    }
+
+С помощью ключевого слова super мы также можем обратиться к реализации методов базового класса.
+
+Запрет наследования
+Хотя наследование очень интересный и эффективный механизм, но в некоторых ситуациях его применение может быть нежелательным. И в этом случае можно запретить наследование с помощью ключевого слова final. Например:
+
+    public final class Person {
+    }
+
+Если бы класс Person был бы определен таким образом, то следующий код был бы ошибочным и не сработал, так как мы тем самым запретили наследование:
+
+
+    class Employee extends Person{ {
+    }
+
+Кроме запрета наследования можно также запретить переопределение отдельных методов. Например, в примере выше переопределен метод displayInfo(), запретим его переопределение:
+
+    public class Person {
+
+        //........................
+
+        public final void display(){
+
+            System.out.println("Имя: " + name);
+        }
+    }
+
+В этом случае класс Employee не сможет переопределить метод display.
+
+Динамическая диспетчеризация методов
+Наследование и возможность переопределения методов открывают нам большие возможности. Прежде всего мы можем передать переменной суперкласса ссылку на объект подкласса:
+
+    Person sam = new Employee("Sam", "Oracle");
+
+Так как Employee наследуется от Person, то объект Employee является в то же время и объектом Person. Грубо говоря, любой работник предприятия одновременно является человеком.
+
+Однако несмотря на то, что переменная представляет объект Person, виртуальная машина видит, что в реальности она указывает на объект Employee. Поэтому при вызове методов у этого объектов будет вызывать та версия методов, которая определена в классе Employee, а не в Person. Например:
+
+
+    public class Program{
+
+        public static void main(String[] args) {
+
+            Person tom = new Person("Tom");
+            tom.display();
+            Person sam = new Employee("Sam", "Oracle");
+            sam.display();
+        }
+    }
+    class Person {
+
+        private String name;
+
+        public String getName() { return name; }
+
+        public Person(String name){
+
+            this.name=name;
+        }
+
+        public void display(){
+
+            System.out.printf("Person %s \n", name);
+        }
+    }
+
+    class Employee extends Person{
+
+        private String company;
+
+        public Employee(String name, String company) {
+
+            super(name);
+            this.company = company;
+        }
+        @Override
+        public void display(){
+
+            System.out.printf("Employee %s works in %s \n", super.getName(), company);
+        }
+    }
+
+Консольный вывод данной программы:
+
+    Person Tom
+    Employee Sam works in Oracle
+
+При вызове переопределенного метода виртуального машина динамически находит и вызывает именно ту версию метода, которая определена в подклассе. Данный процесс еще называется dynamic method lookup или динамический поиск метода или динамическая диспетчеризация методов.
