@@ -948,3 +948,261 @@ out как раз представляет статическую констан
     Employee Sam works in Oracle
 
 При вызове переопределенного метода виртуального машина динамически находит и вызывает именно ту версию метода, которая определена в подклассе. Данный процесс еще называется dynamic method lookup или динамический поиск метода или динамическая диспетчеризация методов.
+
+### Абстрактные классы
+
+Кроме обычных классов в Java есть абстрактные классы. Абстрактный класс похож на обычный класс. В абстрактном классе также можно определить поля и методы, в то же время нельзя создать объект или экземпляр абстрактного класса. Абстрактные классы призваны предоставлять базовый функционал для классов-наследников. А производные классы уже реализуют этот функционал.
+
+При определении абстрактных классов используется ключевое слово abstract:
+
+    public abstract class Human{
+
+        private String name;
+
+        public String getName() { return name; }
+    }
+    
+Но главное отличие состоит в том, что мы не можем использовать конструктор абстрактного класса для создания его объекта. Например, следующим образом:
+
+
+    Human h = new Human();
+
+Кроме обычных методов абстрактный класс может содержать абстрактные методы. Такие методы определяются с помощью ключевого слова abstract и не имеют никакого функционала:
+
+    public abstract void display();
+
+Производный класс обязан переопределить и реализовать все абстрактные методы, которые имеются в базовом абстрактном классе. Также следует учитывать, что если класс имеет хотя бы один абстрактный метод, то данный класс должен быть определен как абстрактный.
+
+Зачем нужны абстрактные классы? Допустим, мы делаем программу для обсулживания банковских операций и определяем в ней три класса: Person, который описывает человека, Employee, который описывает банковского служащего, и класс Client, который представляет клиента банка. Очевидно, что классы Employee и Client будут производными от класса Person, так как оба класса имеют некоторые общие поля и методы. И так как все объекты будут представлять либо сотрудника, либо клиента банка, то напрямую мы от класса Person создавать объекты не будем. Поэтому имеет смысл сделать его абстрактным.
+
+    public class Program{
+
+        public static void main(String[] args) {
+
+            Employee sam = new Employee("Sam", "Leman Brothers");
+            sam.display();
+            Client bob = new Client("Bob", "Leman Brothers");
+            bob.display();
+        }
+    }
+    abstract class Person {
+
+        private String name;
+
+        public String getName() { return name; }
+
+        public Person(String name){
+
+            this.name=name;
+        }
+
+        public abstract void display();
+    }
+
+    class Employee extends Person{
+
+        private String bank;
+
+        public Employee(String name, String company) {
+
+            super(name);
+            this.bank = company;
+        }
+
+        public void display(){
+
+            System.out.printf("Employee Name: %s \t Bank: %s \n", super.getName(), bank);
+        }
+    }
+
+    class Client extends Person
+    {
+        private String bank;
+
+        public Client(String name, String company) {
+
+            super(name);
+            this.bank = company;
+        }
+
+        public void display(){
+
+            System.out.printf("Client Name: %s \t Bank: %s \n", super.getName(), bank);
+        }
+    }
+
+Другим хрестоматийным примером является системы фигур. В реальности не существует геометрической фигуры как таковой. Есть круг, прямоугольник, квадрат, но просто фигуры нет. Однако же и круг, и прямоугольник имеют что-то общее и являются фигурами:
+
+    // абстрактный класс фигуры
+    abstract class Figure{
+
+        float x; // x-координата точки
+        float y; // y-координата точки
+
+        Figure(float x, float y){
+
+            this.x=x;
+            this.y=y;
+        }
+        // абстрактный метод для получения периметра
+        public abstract float getPerimeter();
+        // абстрактный метод для получения площади
+        public abstract float getArea();
+    }
+    // производный класс прямоугольника
+    class Rectangle extends Figure
+    {
+        private float width;
+        private float height;
+
+        // конструктор с обращением к конструктору класса Figure
+        Rectangle(float x, float y, float width, float height){
+
+            super(x,y);
+            this.width = width;
+            this.height = height;
+        }
+
+        public float getPerimeter(){
+
+            return width * 2 + height * 2;
+        }
+
+        public float getArea(){
+
+            return width * height;
+        }
+    }
+
+
+### Иерархия наследования и преобразование типов
+
+В прошлой главе говорилось о преобразованиях объектов простых типов. Однако с объектами классов все происходит немного по-другому. Допустим, у нас есть следующая иерархия классов:
+
+    public class Program{
+
+        public static void main(String[] args) {
+
+            Person tom = new Person("Tom");
+            tom.display();
+            Person sam = new Employee("Sam", "Oracle");
+            sam.display();
+            Person bob = new Client("Bob", "DeutscheBank", 3000);
+            bob.display();
+        }
+    }
+    // класс человека
+    class Person {
+
+        private String name;
+
+        public String getName() { return name; }
+
+        public Person(String name){
+
+            this.name=name;
+        }
+
+        public void display(){
+
+            System.out.printf("Person %s \n", name);
+        }
+    }
+    // служащий некоторой компании
+    class Employee extends Person{
+
+        private String company;
+
+        public Employee(String name, String company) {
+
+            super(name);
+            this.company = company;
+        }
+        public String getCompany(){ return company; }
+
+        public void display(){
+
+            System.out.printf("Employee %s works in %s \n", super.getName(), company);
+        }
+    }
+    // класс клиента банка
+    class Client extends Person{
+
+        private int sum; // Переменная для хранения суммы на счете
+        private String bank;
+
+        public Client(String name, String bank, int sum) {
+
+            super(name);
+            this.bank=bank;
+            this.sum=sum;
+        }
+
+        public void display(){
+
+            System.out.printf("Client %s has account in %s \n", super.getName(), bank);
+        }
+
+        public String getBank(){ return bank; }
+        public int getSum(){ return sum; }
+    }
+
+В этой иерархии классов можно проследить следующую цепь наследования: Object (все классы неявно наследуются от типа Object) -> Person -> Employee|Client.
+
+Преобразование типов в языке Java
+Суперклассы обычно размещаются выше подклассов, поэтому на вершине наследования находится класс Object, а в самом низу Employee и Client.
+
+Объект подкласса также представляет объект суперкласса. Поэтому в программе мы можем написать следующим образом:
+
+
+    Object tom = new Person("Tom");
+    Object sam = new Employee("Sam", "Oracle");
+    Object kate = new Client("Kate", "DeutscheBank", 2000);
+    Person bob = new Client("Bob", "DeutscheBank", 3000);
+    Person alice = new Employee("Alice", "Google");
+
+Это так называемое восходящее преобразование (от подкласса внизу к суперклассу вверху иерархии) или upcasting. Такое преобразование осуществляется автоматически.
+
+Обратное не всегда верно. Например, объект Person не всегда является объектом Employee или Client. Поэтому нисходящее преобразование или downcasting от суперкласса к подклассу автоматически не выполняется. В этом случае нам надо использовать операцию преобразования типов.
+
+    Object sam = new Employee("Sam", "Oracle");
+
+    // нисходящее преобразование от Object к типу Employee
+    Employee emp = (Employee)sam;
+    emp.display();
+    System.out.println(emp.getCompany());
+
+В данном случае переменная sam приводится к типу Employee. И затем через объект emp мы можем обратиться к функционалу объекта Employee.
+
+Мы можем преобразовать объект Employee по всей прямой линии наследования от Object к Employee.
+
+Примеры нисходящих перобразований:
+
+    Object kate = new Client("Kate", "DeutscheBank", 2000);
+    ((Person)kate).display();
+
+    Object sam = new Employee("Sam", "Oracle");
+    ((Employee)sam).display();
+
+Но рассмотрим еще одну ситуацию:
+
+    Object kate = new Client("Kate", "DeutscheBank", 2000);
+    Employee emp = (Employee) kate;
+    emp.display();
+
+// или так
+    ((Employee)kate).display();
+В данном случае переменная типа Object хранит ссылку на объект Client. Мы можем без ошибок привести этот объект к типам Person или Client. Но при попытке преобразования к типу Employee мы получим ошибку во время выполнения. Так как kate не представляет объект типа Employee.
+
+Здесь мы явно видим, что переменная kate - это ссылка на объект Client, а не Employee. Однако нередко данные приходят извне, и мы можем точно не знать, какой именно объект эти данные представляют. Соответственно возникает большая вероятная столкнуться с ошибкой. И перед тем, как провести преобразование типов, мы можем проверить, а можем ли мы выполнить приведение с помощью оператора instanceof:
+
+    Object kate = new Client("Kate", "DeutscheBank", 2000);
+    if(kate instanceof Employee){
+
+        ((Employee)kate).display();
+    }
+    else{
+
+        System.out.println("Conversion is invalid");
+    }
+Выражение kate instanceof Employee проверяет, является ли переменная kate объектом типа Employee. Но так как в данном случае явно не является, то такая проверка вернет значение false, и преобразование не сработает.
