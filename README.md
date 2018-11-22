@@ -25,7 +25,7 @@
 <a name="guides"/>
 
 ## Гайды
-
+* [Получение студенческой лицензии](../master/guides/jetbrains_acc.md)
 * [Установка JDK](../master/guides/jdk_install_guides.md)
 * [Установка IDE](../master/guides/ide_install_guide.md)
 * [Создание проекта в IntelliJ IDEA](../master/guides/create_project_guide.md)
