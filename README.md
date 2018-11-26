@@ -15,7 +15,7 @@
 4. [Операторы ветвления. Циклы.](../master/lectures/lecture4.md)
 5. [Масивы. Строки.](../master/lectures/lecture5.md)
 6. [ООП. Классы. Объекты. Интерфейсы. Обстрактные классы.](../master/lectures/lecture6.md)
-7. Принципы ООП. Патерны программирования
+7. [Принципы ООП. Патерны программирования](../master/lectures/lecture7.md)
 8. Работа с файлами.
    Исключения.
 9. Java Collections Framework.
